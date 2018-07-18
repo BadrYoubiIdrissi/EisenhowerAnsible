@@ -1,0 +1,44 @@
+---
+- hosts: all
+  become: yes
+  vars_files:
+      - vars/main.yml
+  roles:
+    - geerlingguy.nodejs
+  tasks:
+    - name:  Installing latest nginx
+      apt:
+        name: nginx
+        state: latest
+    - name:  Installing latest git
+      apt:
+        name: git
+        state: latest
+    - name: Nginx template
+      template:
+        src: templates/default.j2
+        dest: /etc/nginx/sites-available/default
+    - name: Starting Nginx 
+      service:
+        name: nginx
+        enabled: yes
+        state: restarted
+    - name: Setting up automatic deployment
+      command: git init --bare /home/debian/eisenhower-backend
+    - command: git init --bare /home/debian/eisenhower-client
+    - file:
+        path: /var/www/html/eisenhower
+        state: directory
+        mode: 0755
+    - template:
+        src: env.j2
+        dest: /var/www/html/eisenhower/.env
+    - template:
+        src: templates/post-receive-client.j2
+        dest: /home/debian/eisenhower-client/hooks/post-receive
+        mode: 0755
+    - template:
+        src: templates/post-receive-backend.j2
+        dest: /home/debian/eisenhower-backend/hooks/post-receive
+        mode: 0755
+    
