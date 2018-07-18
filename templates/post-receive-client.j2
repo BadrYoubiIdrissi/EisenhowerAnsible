@@ -6,7 +6,7 @@ cd /var/www/html/eisenhower/client
 
 echo ‘post-receive: git check out…’
 
-git --git-dir=/home/debian/eisenhower-client --work-tree=/var/www/html/eisenhower/client checkout master -f
+git --git-dir=/home/git/eisenhower-client.git --work-tree=/var/www/html/eisenhower/client checkout master -f
 
 echo ‘post-receive: npm install…’
 
