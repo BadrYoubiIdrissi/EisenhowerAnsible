@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo ‘post-receive: Triggered.’
+
+cd /var/www/html/eisenhower
+
+echo ‘post-receive: git check out…’
+
+git --git-dir=/home/debian/eisenhower-backend --work-tree=/var/www/html/eisenhower checkout master -f
+
+echo ‘post-receive: npm install…’
+
+npm install \
+
+&& pm2 start app.js --name eisenhower \
+
+&& echo ‘post-receive: app started successfully with pm2.
