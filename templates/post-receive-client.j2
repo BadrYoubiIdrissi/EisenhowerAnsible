@@ -2,18 +2,6 @@
 
 echo ‘post-receive: Triggered.’
 
-mkdir /var/www/html/eisenhower/client
-
-cd /var/www/html/eisenhower/client
-
 echo ‘post-receive: git check out…’
 
 git --git-dir=/home/git/eisenhower-client.git --work-tree=/var/www/html/eisenhower/client checkout master -f
-
-echo ‘post-receive: npm install…’
-
-npm install
-
-echo ‘post-receive: building…’
-
-npm run build

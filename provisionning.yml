@@ -3,66 +3,72 @@
   become: yes
   vars_files:
     - vars/main.yml
-  # roles:
-  #   - geerlingguy.nodejs
+  roles:
+    - geerlingguy.nodejs
   tasks:
-    # - name:  Installing latest nginx
-    #   apt:
-    #     name: nginx
-    #     state: latest
-    # - name:  Installing latest git
-    #   apt:
-    #     name: git
-    #     state: latest
-    # - name: Nginx template
-    #   template:
-    #     src: templates/default.j2
-    #     dest: /etc/nginx/sites-available/default
-    # - name: Starting Nginx 
-    #   service:
-    #     name: nginx
-    #     enabled: yes
-    #     state: restarted
-    # - name: Adding production group
-    #   group:
-    #     name: production
-    # - name: Adding git user
-    #   user:
-    #     name: git
-    #     group: production
-    # - name: Adding debian user to production group
-    #   user:
-    #     name: debian
-    #     group: production
-    # - name: Adding ssh key
-    #   authorized_key:
-    #     key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDY88sEX13bmxJP452DAYlK5KzmcH08M23+EXOOv46+kjNxwuGm2kxUesI1Te8xbEP53p/LBN2RwmZlJZpkdLhGb4UnXTv0nyXf8hCiQj5mOXbIhGLFgojxA8cM1MgYrfYAXFQ0OcyTsEI13iF5P3PD0a7etU8mNWLyNdPY9EtlLwYgJaCGZ8xjnQyfHVo7jsy9o8OaJJQ4YjTKATsU1h0E9iJ/v3wtsIFWytUW+QkDEEuJ+oASRs9V8nD5sjT5oQe3l4FkoBUMgHHwaDBehWlQbI/8cPit0Q7zskg4YclZblNLLF7+vxTZKhyBtYkhxZQHll6x6vK86NI1ElikTmfpTpgMTNUHJND8yAdTHGMBR8e5hDZB9luL03HwRqzySc54nOO21n99Gu1HZdpQu4HdBuGvjexd6UVwE5p1LfuTLDZW3/gW/AzZ+cU8i9wCtR2NIOJmY/33rqV88Oq7HTCJ+v97zpDdrMfpIJbPE+aamm9LYUGT69g9spR5rsmLRgrcVlE6jejbpiuG3Q1bMqUxTNMz/rhifE7w5a9XJRl3XC/7qBiT5+PM0mzMIziQflvjfmHrVI+CKY8SAeHZMXGgv5ZNaPIwu6jqntyleJ332OjTqzWtOkTOl6VtsEGQ0yVtOQT88TqWOPdUgU1a7fDSEsUtuy4LRCVa3UneJsPpZQ== badr.youbi-idrissi@student.ecp.fr
-    #     user: git
-    # - name: Creating bare repos
-    #   command: git init --bare /home/git/eisenhower-backend.git
-    # - command: git init --bare /home/git/eisenhower-client.git
-    # - name: Setting permissions
-    #   file:
-    #     path: /home/git/eisenhower-backend.git
-    #     group: production
-    #     owner: git
-    #     recurse: yes
-    # - file:
-    #     path: /home/git/eisenhower-backend.git
-    #     group: production
-    #     owner: git
-    #     recurse: yes
-    # - name: Creating folder structure
-    #   file:
-    #     path: /var/www/html/eisenhower
-    #     state: directory
-    #     owner: git
-    #     group: production
-    # - template:
-    #     src: env.j2
-    #     dest: /var/www/html/eisenhower/.env
-    #     owner: git
-    #     group: production
+    - name:  Installing latest nginx
+      apt:
+        name: nginx
+        state: latest
+    - name:  Installing latest git
+      apt:
+        name: git
+        state: latest
+    - name: Nginx template
+      template:
+        src: templates/default.j2
+        dest: /etc/nginx/sites-available/default
+    - name: Starting Nginx 
+      service:
+        name: nginx
+        enabled: yes
+        state: restarted
+    - name: Adding production group
+      group:
+        name: production
+    - name: Adding git user
+      user:
+        name: git
+        group: production
+    - name: Adding debian user to production group
+      user:
+        name: debian
+        group: production
+    - name: Adding ssh key
+      authorized_key:
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDY88sEX13bmxJP452DAYlK5KzmcH08M23+EXOOv46+kjNxwuGm2kxUesI1Te8xbEP53p/LBN2RwmZlJZpkdLhGb4UnXTv0nyXf8hCiQj5mOXbIhGLFgojxA8cM1MgYrfYAXFQ0OcyTsEI13iF5P3PD0a7etU8mNWLyNdPY9EtlLwYgJaCGZ8xjnQyfHVo7jsy9o8OaJJQ4YjTKATsU1h0E9iJ/v3wtsIFWytUW+QkDEEuJ+oASRs9V8nD5sjT5oQe3l4FkoBUMgHHwaDBehWlQbI/8cPit0Q7zskg4YclZblNLLF7+vxTZKhyBtYkhxZQHll6x6vK86NI1ElikTmfpTpgMTNUHJND8yAdTHGMBR8e5hDZB9luL03HwRqzySc54nOO21n99Gu1HZdpQu4HdBuGvjexd6UVwE5p1LfuTLDZW3/gW/AzZ+cU8i9wCtR2NIOJmY/33rqV88Oq7HTCJ+v97zpDdrMfpIJbPE+aamm9LYUGT69g9spR5rsmLRgrcVlE6jejbpiuG3Q1bMqUxTNMz/rhifE7w5a9XJRl3XC/7qBiT5+PM0mzMIziQflvjfmHrVI+CKY8SAeHZMXGgv5ZNaPIwu6jqntyleJ332OjTqzWtOkTOl6VtsEGQ0yVtOQT88TqWOPdUgU1a7fDSEsUtuy4LRCVa3UneJsPpZQ== badr.youbi-idrissi@student.ecp.fr
+        user: git
+    - name: Creating bare repos
+      command: git init --bare /home/git/eisenhower-backend.git
+    - command: git init --bare /home/git/eisenhower-client.git
+    - name: Setting permissions
+      file:
+        path: /home/git/eisenhower-backend.git
+        group: production
+        owner: git
+        recurse: yes
+    - file:
+        path: /home/git/eisenhower-backend.git
+        group: production
+        owner: git
+        recurse: yes
+    - name: Creating folder structure
+      file:
+        path: /var/www/html/eisenhower
+        state: directory
+        owner: git
+        group: production
+    - template:
+        src: env.j2
+        dest: /var/www/html/eisenhower/.env
+        owner: git
+        group: production
+    - name: Creating static directory
+      file:
+        path: /var/www/html/eisenhower/static
+        state:directory
+        owner: git
+        group: production
     - template:
         src: templates/post-receive-client.j2
         dest: /home/git/eisenhower-client.git/hooks/post-receive
