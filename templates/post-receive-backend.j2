@@ -12,6 +12,8 @@ echo ‘post-receive: npm install…’
 
 npm install
 
+pm2 delete eisenhower
+
 pm2 start app.js --name eisenhower
 
 echo ‘post-receive: app started successfully with pm2.
