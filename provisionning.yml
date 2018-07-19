@@ -26,13 +26,13 @@
     - name: Adding production group
       group:
         name: production
-    - name: Adding git user
-      user:
-        name: git
-        group: production
     - name: Adding debian user to production group
       user:
         name: debian
+        group: production
+    - name: Adding git user
+      user:
+        name: git
         group: production
     - name: Adding ssh key
       authorized_key:
@@ -63,6 +63,10 @@
         dest: /var/www/html/eisenhower/.env
         owner: git
         group: production
+    - name: installing pm2
+      npm:
+        name: pm2
+        path: /var/www/html/eisenhower
     - name: Creating static directory
       file:
         path: /var/www/html/eisenhower/static
