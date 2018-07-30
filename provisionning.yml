@@ -14,6 +14,15 @@
       apt:
         name: git
         state: latest
+    - name: Adding mongodb sources
+      command: echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+    - name: Installing mongodb
+      apt:
+        name: mongodb-org
+        state: present
+        update_cache: yes
+        allow_unauthenticated: yes
+       
     - name: Nginx template
       template:
         src: templates/default.j2
